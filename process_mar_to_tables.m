@@ -333,7 +333,9 @@ cd /projects/mar/daily_output
 save('MARc.mat',"MARc",'-v7.3')
 
 
-
+%%
+cd /projects/mar/daily_output
+par_structure_of_timetables_to_overlay(MARc)
 
 
 
