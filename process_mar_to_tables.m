@@ -272,7 +272,7 @@ for i = 1:length(fieldNames)
         {'AL2'}, {'albedo'});
 
     MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
-        {'RHZ_%'}, {'rh_%'});
+        {'RHZ_%'}, {'rh'});
 
     MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
         {'CU'}, {'cloud_upper'});
