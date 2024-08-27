@@ -1,0 +1,85 @@
+
+cd /project/mar/daily_output
+%%
+addpath /Users/andrigun/Dropbox/04-Repos/Water.Basics/cdt/
+addpath /Users/andrigun/Dropbox/04-Repos/timeseriestools/
+
+set(0,'defaultfigurepaperunits','centimeters');
+set(0,'DefaultAxesFontSize',16)
+set(0,'defaultfigurecolor','w');
+set(0,'defaultfigureinverthardcopy','off');
+set(0,'defaultfigurepaperorientation','landscape');
+set(0,'defaultfigurepapersize',[35 21]);
+set(0,'defaultfigurepaperposition',[.25 .25 [35 21]-0.5]);
+set(0,'DefaultTextInterpreter','none');
+set(0, 'DefaultFigureUnits', 'centimeters');
+set(0, 'DefaultFigurePosition', [.25 .25 [35 21]-0.5]);
+
+%% Find all the overlay structures
+d = dir('*_overlay*');
+%%
+for i = 1%:length(d)
+    load([d(i).name])
+    gname = [d(i).name];
+    gname = replace( gname , '_' , ' ' );
+    gname = replace( gname , 'overlay.mat' , ' ' );
+    fig_title = replace( gname , 'jokull' , 'jökull' );
+%%
+figure, hold on
+plt_overlay(Rt.smb_mmWeq,tbl.smb_mmWeq,...
+    [2021,2022,2023],[fig_title,'Dagleg afkoma yfirborðs'],...
+    '(mm w.eq.)',...
+    'SMB',' smb_mmWeq')
+%%
+figure, hold on
+plt_overlay(Rc.smb_mmWeq,tbl.smb_mmWeq,...
+    [2021,2022,2023],[fig_title,'- Uppsöfnuð afkoma yfirborðs'],...
+    '(mm w.eq.)',...
+    '','smb_mmWeq')
+%%
+figure, hold on
+plt_overlay(Rc.snowfall_mmWeq,tbl.snowfall_mmWeq,...
+    [2021,2022,2023],[fig_title,'- Uppsöfnuð úrkoma (snjór)'],...
+    '(mm w.eq.)',...
+    'mmWeq',' ')
+
+%%
+figure, hold on
+plt_overlay(Rc.rainfall_mmWeq,tbl.rainfall_mmWeq,...
+    [2021,2022,2023],[fig_title,'- Uppsöfnuð úrkoma (regn)'],...
+    '(mm w.eq.)',...
+    'mmWeq',' ')
+%%
+figure, hold on
+plt_overlay(Rc.runoff_mmWeq,tbl.runoff_mmWeq,...
+    [2021,2022,2023],[fig_title,'- afrennsli'],...
+    '(mm w.eq.)',...
+    'mmWeq',' ')
+%%
+figure, hold on
+plt_overlay(Rc.meltwater_mmWeq,tbl.meltwater_mmWeq,...
+    [2021,2022,2023],[fig_title,'- leysing'],...
+    '(mm w.eq.)',...
+    'mmWeq',' ')
+
+%%
+figure, hold on
+plt_overlay(Rt.air_temperature_2m,tbl.air_temperature_2m,...
+    [2021,2022,2023],[fig_title,'- lofthiti'],...
+    '(°C)',...
+    '',' ')
+%%
+sw_n = Rt.sw_net_wm2.HY_2023
+lw_n = Rt.lw_net_wm2.HY_2023
+shf = Rt.sh _net_wm2.HY_2023
+lhf = Rt.LHF_wm2.HY_2023
+
+%%
+figure, hold on
+plot(Rt.meltwater_mmWeq.Time,(Rt.sw_net_wm2.HY_2023))
+plot(Rt.meltwater_mmWeq.Time,(Rt.sw_net_wm2.AY_mean))
+%%
+plot(Rt.snowfall_mmWeq.Time,(Rt.sw_net_wm2.HY_2023))
+plot(Rt.rainfall_mmWeq.Time,(Rt.LHF_wm2.HY_2023))
+plot(Rt.runoff_mmWeq.Time,(Rt.SHF_wm2.HY_2023))
+end

@@ -1,7 +1,9 @@
 % MAR dumper to timetable
 clear all
 disp('Processing MAR data')
+
 addpath /git/cdt
+addpath /git/timeseriestools
 
 load('/projects/mar/geo.mat')
 cd /data/mar
@@ -332,10 +334,11 @@ cd /projects/mar/daily_output
 %cd /Users/andrigun/Dropbox/01-Projects/data
 save('MARc.mat',"MARc",'-v7.3')
 
-
 %%
 cd /projects/mar/daily_output
-par_structure_of_timetables_to_overlay(MARc)
+%%
+baseline_period = [datetime(1990,01,01),datetime(2020,12,31)];
+par_structure_of_timetables_to_overlay(MARc,baseline_period)
 
 
 
