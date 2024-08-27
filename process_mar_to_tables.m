@@ -218,7 +218,7 @@ end
 cd /projects/mar/daily_output
 save('MAR.mat',"MAR",'-v7.3')
 
-% Clean and process table
+%% Clean and process table
 % Get all field names in the structure
 fieldNames = fieldnames(MAR);
 % Select field names containing the string 'sensor'
@@ -227,12 +227,12 @@ selectedFields = fieldNames(contains(fieldNames, 'jokull'));
 % Create a new structure to store the selected timetables
 MARc = struct();
 
-% Loop through the selected fields and extract the corresponding timetables
+%% Loop through the selected fields and extract the corresponding timetables
 for i = 1:length(selectedFields)
     MARc.(selectedFields{i}) = MAR.(selectedFields{i});
 end
 
-% rename variables
+%% rename variables
 
 fieldNames = fieldnames(MARc);
 
@@ -300,9 +300,9 @@ for i = 1:length(fieldNames)
     MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
         {'LWU_wm2'}, {'lw_out_wm2'});
 
-end
 
-% Add calcuialteed variables
+
+%% Add calcuialteed variables
 % Wind speed
 MARc.(string(fieldNames(i))).wind_speed = ...
     sqrt(...
@@ -329,6 +329,7 @@ MARc.(string(fieldNames(i))).sw_net_wm2 = ...
 
 MARc.(string(fieldNames(i))).lw_net_wm2 = ...
     MARc.(string(fieldNames(i))).lw_in_wm2 - MARc.(string(fieldNames(i))).lw_out_wm2;
+end
 
 cd /projects/mar/daily_output
 %cd /Users/andrigun/Dropbox/01-Projects/data
