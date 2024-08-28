@@ -1,8 +1,8 @@
 
 cd /projects/mar/daily_output
 %%
-addpath /Users/andrigun/Dropbox/04-Repos/Water.Basics/cdt/
-addpath /Users/andrigun/Dropbox/04-Repos/timeseriestools/
+addpath git/cdt/
+addpath git/timeseriestools/
 
 set(0,'defaultfigurepaperunits','centimeters');
 set(0,'DefaultAxesFontSize',16)
