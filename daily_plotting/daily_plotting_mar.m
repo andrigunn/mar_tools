@@ -31,11 +31,19 @@ plt_overlay(Rt.smb_mmWeq,tbl.smb_mmWeq,...
     '(mm w.eq.)',...
     'SMB',' smb_mmWeq')
 
+    cd '/projects/mar/daily_output'
+    exportgraphics(gcf,'mar_smb_mmWeq_ts.jpg');
+    exportgraphics(gcf,'mar_smb_mmWeq_ts.pdf');
+
+
 figure, hold on
 plt_overlay(Rc.smb_mmWeq,tbl.smb_mmWeq,...
     [2021,2022,2023],[fig_title,'- Uppsöfnuð afkoma yfirborðs'],...
     '(mm w.eq.)',...
     '','smb_mmWeq')
+    
+    exportgraphics(gcf,'mar_smb_mmWeq_cumts.jpg');
+    exportgraphics(gcf,'mar_smb_mmWeq_cumts.pdf');
 
 figure, hold on
 plt_overlay(Rc.snowfall_mmWeq,tbl.snowfall_mmWeq,...
@@ -43,11 +51,17 @@ plt_overlay(Rc.snowfall_mmWeq,tbl.snowfall_mmWeq,...
     '(mm w.eq.)',...
     'mmWeq',' ')
 
+    exportgraphics(gcf,'mar_snowfall_mmWeq_cumts.jpg');
+    exportgraphics(gcf,'mar_snowfall_mmWeq_cumts.pdf');
+
 figure, hold on
 plt_overlay(Rc.rainfall_mmWeq,tbl.rainfall_mmWeq,...
     [2021,2022,2023],[fig_title,'- Uppsöfnuð úrkoma (regn)'],...
     '(mm w.eq.)',...
     'mmWeq',' ')
+
+    exportgraphics(gcf,'mar_rainfall_mmWeq_cumts.jpg');
+    exportgraphics(gcf,'mar_rainfall_mmWeq_cumts.pdf');
 
 figure, hold on
 plt_overlay(Rc.runoff_mmWeq,tbl.runoff_mmWeq,...
@@ -55,17 +69,26 @@ plt_overlay(Rc.runoff_mmWeq,tbl.runoff_mmWeq,...
     '(mm w.eq.)',...
     'mmWeq',' ')
 
+    exportgraphics(gcf,'mar_runoff_mmWeq_cumts.jpg');
+    exportgraphics(gcf,'mar_runoff_mmWeq_cumts.pdf');
+
 figure, hold on
 plt_overlay(Rc.meltwater_mmWeq,tbl.meltwater_mmWeq,...
     [2021,2022,2023],[fig_title,'- leysing'],...
     '(mm w.eq.)',...
     'mmWeq',' ')
 
+    exportgraphics(gcf,'mar_meltwater_mmWeq_cumts.jpg');
+    exportgraphics(gcf,'mar_meltwater_mmWeq_cumts.pdf');
+
 figure, hold on
 plt_overlay(Rt.air_temperature_2m,tbl.air_temperature_2m,...
     [2021,2022,2023],[fig_title,'- lofthiti'],...
     '(°C)',...
     '',' ')
+
+    exportgraphics(gcf,'mar_air_temperature_2m_ts.jpg');
+    exportgraphics(gcf,'mar_air_temperature_2m_ts.pdf');
 
 sw_n = Rt.sw_net_wm2.HY_2023;
 lw_n = Rt.lw_net_wm2.HY_2023;
@@ -120,5 +143,9 @@ legend show
 grid on
 
 sgtitle([fig_title,'- orkuþættir'])
+
+    exportgraphics(gcf,'mar_seb_ts.jpg');
+    exportgraphics(gcf,'mar_seb_ts.pdf');
+
 
 end
