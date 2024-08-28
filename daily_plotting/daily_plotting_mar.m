@@ -1,8 +1,8 @@
 
 cd /projects/mar/daily_output
 %%
-addpath git/cdt/
-addpath git/timeseriestools/
+addpath('/git/cdt/')
+addpath('/git/timeseriestools/')
 
 set(0,'defaultfigurepaperunits','centimeters');
 set(0,'DefaultAxesFontSize',16)
@@ -18,7 +18,7 @@ set(0, 'DefaultFigurePosition', [.25 .25 [35 21]-0.5]);
 %% Find all the overlay structures
 d = dir('*_overlay*');
 %%
-for i = 1%:length(d)
+for i = 1:length(d)
     load([d(i).name])
     gname = [d(i).name];
     gname = replace( gname , '_' , ' ' );
