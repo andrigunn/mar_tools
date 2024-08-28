@@ -1,5 +1,5 @@
 
-cd /project/mar/daily_output
+cd /projects/mar/daily_output
 %%
 addpath /Users/andrigun/Dropbox/04-Repos/Water.Basics/cdt/
 addpath /Users/andrigun/Dropbox/04-Repos/timeseriestools/
