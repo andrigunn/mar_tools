@@ -152,5 +152,4 @@ sgtitle([fig_title,'- Orkuþættir']);
     exportgraphics(gcf,[pname,'mar_seb_ts.jpg']);
     exportgraphics(gcf,[pname,'mar_seb_ts.pdf']);
 
-
 end

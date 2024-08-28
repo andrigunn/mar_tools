@@ -216,7 +216,7 @@ end
 
 %
 cd /projects/mar/daily_output
-save('MAR.mat',"MAR",'-v7.3')
+save('MAR_all.mat',"MAR",'-v7.3')
 
 %% Clean and process table
 % Get all field names in the structure
@@ -225,122 +225,242 @@ fieldNames = fieldnames(MAR);
 selectedFields = fieldNames(contains(fieldNames, 'jokull'));
 
 % Create a new structure to store the selected timetables
-MARc = struct();
+MAR_glaciers = struct();
 
 %% Loop through the selected fields and extract the corresponding timetables
 for i = 1:length(selectedFields)
-    MARc.(selectedFields{i}) = MAR.(selectedFields{i});
+    MAR_glaciers.(selectedFields{i}) = MAR.(selectedFields{i});
 end
 
 %% rename variables
 
-fieldNames = fieldnames(MARc);
+fieldNames = fieldnames(MAR_glaciers);
 
 for i = 1:length(fieldNames)
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'SU_mmWeq'}, {'sublimation_mmWeq'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'SU_Gl'}, {'sublimation_Gl'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'ME_mmWeq'}, {'meltwater_mmWeq'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'ME_Gl'}, {'meltwater_Gl'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'SF_mmWeq'}, {'snowfall_mmWeq'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'SF_Gl'}, {'snowfall_Gl'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'RF_mmWeq'}, {'rainfall_mmWeq'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'RF_Gl'}, {'rainfall_Gl'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'RU_mmWeq'}, {'runoff_mmWeq'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'RU_Gl'}, {'runoff_Gl'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'TTZ_C°'}, {'air_temperature_2m'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'AL2'}, {'albedo'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'RHZ_%'}, {'rh'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'CU'}, {'cloud_upper'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'CM'}, {'cloud_middle'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'CD'}, {'cloud_down'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'U2Z_ms'}, {'ws_north_ms'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'V2Z_ms'}, {'ws_west_ms'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'SWD_wm2'}, {'sw_in_wm2'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'LWD_wm2'}, {'lw_in_wm2'});
 
-    MARc.(string(fieldNames(i))) = renamevars(MARc.(string(fieldNames(i))),...
+    MAR_glaciers.(string(fieldNames(i))) = renamevars(MAR_glaciers.(string(fieldNames(i))),...
         {'LWU_wm2'}, {'lw_out_wm2'});
 
 
 
 %% Add calcuialteed variables
 % Wind speed
-MARc.(string(fieldNames(i))).wind_speed = ...
+MAR_glaciers.(string(fieldNames(i))).wind_speed = ...
     sqrt(...
-    MARc.(string(fieldNames(i))).ws_north_ms.^2 ...
-    + MARc.(string(fieldNames(i))).ws_west_ms.^2);
+    MAR_glaciers.(string(fieldNames(i))).ws_north_ms.^2 ...
+    + MAR_glaciers.(string(fieldNames(i))).ws_west_ms.^2);
 
 % Wind direction
 % Calculate wind direction in radians, then convert to degrees
-wind_direction_rad = atan2(MARc.(string(fieldNames(i))).ws_west_ms,...
-     MARc.(string(fieldNames(i))).ws_north_ms); % atan2(y, x)
+wind_direction_rad = atan2(MAR_glaciers.(string(fieldNames(i))).ws_west_ms,...
+     MAR_glaciers.(string(fieldNames(i))).ws_north_ms); % atan2(y, x)
 
-MARc.(string(fieldNames(i))).wind_direction_deg = rad2deg(wind_direction_rad);
+MAR_glaciers.(string(fieldNames(i))).wind_direction_deg = rad2deg(wind_direction_rad);
 
 % Ensure the direction is within [0, 360) degrees
-MARc.(string(fieldNames(i))).wind_direction_deg(MARc.(string(fieldNames(i))).wind_direction_deg < 0) = MARc.(string(fieldNames(i))).wind_direction_deg(MARc.(string(fieldNames(i))).wind_direction_deg < 0) + 360;
+MAR_glaciers.(string(fieldNames(i))).wind_direction_deg(MAR_glaciers.(string(fieldNames(i))).wind_direction_deg < 0) = MAR_glaciers.(string(fieldNames(i))).wind_direction_deg(MAR_glaciers.(string(fieldNames(i))).wind_direction_deg < 0) + 360;
 
 % Radiation
-MARc.(string(fieldNames(i))).sw_out_wm2 = ...
-    MARc.(string(fieldNames(i))).sw_in_wm2.*...
-    (1-MARc.(string(fieldNames(i))).albedo);
+MAR_glaciers.(string(fieldNames(i))).sw_out_wm2 = ...
+    MAR_glaciers.(string(fieldNames(i))).sw_in_wm2.*...
+    (1-MAR_glaciers.(string(fieldNames(i))).albedo);
 
-MARc.(string(fieldNames(i))).sw_net_wm2 = ...
-    MARc.(string(fieldNames(i))).sw_in_wm2 - MARc.(string(fieldNames(i))).sw_out_wm2;
+MAR_glaciers.(string(fieldNames(i))).sw_net_wm2 = ...
+    MAR_glaciers.(string(fieldNames(i))).sw_in_wm2 - MAR_glaciers.(string(fieldNames(i))).sw_out_wm2;
 
-MARc.(string(fieldNames(i))).lw_net_wm2 = ...
-    MARc.(string(fieldNames(i))).lw_in_wm2 - MARc.(string(fieldNames(i))).lw_out_wm2;
+MAR_glaciers.(string(fieldNames(i))).lw_net_wm2 = ...
+    MAR_glaciers.(string(fieldNames(i))).lw_in_wm2 - MAR_glaciers.(string(fieldNames(i))).lw_out_wm2;
 end
 
 cd /projects/mar/daily_output
 %cd /Users/andrigun/Dropbox/01-Projects/data
-save('MARc.mat',"MARc",'-v7.3')
+save('MAR_glaciers.mat',"MAR_glaciers",'-v7.3')
 
 %%
 cd /projects/mar/daily_output
 %%
 baseline_period = [datetime(1990,01,01),datetime(2020,12,31)];
-par_structure_of_timetables_to_overlay(MARc,baseline_period)
+par_structure_of_timetables_to_overlay(MAR_glaciers,baseline_period)
 
+%% Make MAR hydro
+% Get all field names in the structure
+fieldNames = fieldnames(MAR);
+%% Select field names containing the string 'sensor'
+selectedFields = fieldNames(~contains(fieldNames, 'jokull'));
+
+%% Create a new structure to store the selected timetables
+MAR_hydro = struct();
+
+%% Loop through the selected fields and extract the corresponding timetables
+for i = 1:length(selectedFields)
+    MAR_hydro.(selectedFields{i}) = MAR.(selectedFields{i});
+end
+
+%% rename variables
+
+fieldNames = fieldnames(MAR_hydro);
+
+for i = 1:length(fieldNames)
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'SU_mmWeq'}, {'sublimation_mmWeq'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'SU_Gl'}, {'sublimation_Gl'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'ME_mmWeq'}, {'meltwater_mmWeq'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'ME_Gl'}, {'meltwater_Gl'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'SF_mmWeq'}, {'snowfall_mmWeq'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'SF_Gl'}, {'snowfall_Gl'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'RF_mmWeq'}, {'rainfall_mmWeq'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'RF_Gl'}, {'rainfall_Gl'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'RU_mmWeq'}, {'runoff_mmWeq'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'RU_Gl'}, {'runoff_Gl'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'TTZ_C°'}, {'air_temperature_2m'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'AL2'}, {'albedo'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'RHZ_%'}, {'rh'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'CU'}, {'cloud_upper'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'CM'}, {'cloud_middle'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'CD'}, {'cloud_down'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'U2Z_ms'}, {'ws_north_ms'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'V2Z_ms'}, {'ws_west_ms'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'SWD_wm2'}, {'sw_in_wm2'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'LWD_wm2'}, {'lw_in_wm2'});
+
+    MAR_hydro.(string(fieldNames(i))) = renamevars(MAR_hydro.(string(fieldNames(i))),...
+        {'LWU_wm2'}, {'lw_out_wm2'});
+
+%% Add calcuialteed variables
+% Wind speed
+MAR_hydro.(string(fieldNames(i))).wind_speed = ...
+    sqrt(...
+    MAR_hydro.(string(fieldNames(i))).ws_north_ms.^2 ...
+    + MAR_hydro.(string(fieldNames(i))).ws_west_ms.^2);
+
+% Wind direction
+% Calculate wind direction in radians, then convert to degrees
+wind_direction_rad = atan2(MAR_hydro.(string(fieldNames(i))).ws_west_ms,...
+     MAR_hydro.(string(fieldNames(i))).ws_north_ms); % atan2(y, x)
+
+MAR_hydro.(string(fieldNames(i))).wind_direction_deg = rad2deg(wind_direction_rad);
+
+% Ensure the direction is within [0, 360) degrees
+MAR_hydro.(string(fieldNames(i))).wind_direction_deg(MAR_hydro.(string(fieldNames(i))).wind_direction_deg < 0) = MAR_hydro.(string(fieldNames(i))).wind_direction_deg(MAR_hydro.(string(fieldNames(i))).wind_direction_deg < 0) + 360;
+
+% Radiation
+MAR_hydro.(string(fieldNames(i))).sw_out_wm2 = ...
+    MAR_hydro.(string(fieldNames(i))).sw_in_wm2.*...
+    (1-MAR_hydro.(string(fieldNames(i))).albedo);
+
+MAR_hydro.(string(fieldNames(i))).sw_net_wm2 = ...
+    MAR_hydro.(string(fieldNames(i))).sw_in_wm2 - MAR_hydro.(string(fieldNames(i))).sw_out_wm2;
+
+MAR_hydro.(string(fieldNames(i))).lw_net_wm2 = ...
+    MAR_hydro.(string(fieldNames(i))).lw_in_wm2 - MAR_hydro.(string(fieldNames(i))).lw_out_wm2;
+end
+%%
+cd /projects/mar/daily_output
+%cd /Users/andrigun/Dropbox/01-Projects/data
+save('MAR_hydro.mat',"MAR_hydro",'-v7.3')
+
+%%
+cd /projects/mar/daily_output
+%%
+baseline_period = [datetime(1990,01,01),datetime(2020,12,31)];
+par_structure_of_timetables_to_overlay(MAR_hydro,baseline_period)
 
 
 
