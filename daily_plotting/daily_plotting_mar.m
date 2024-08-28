@@ -1,6 +1,9 @@
 
 cd /projects/mar/daily_output
 %%
+baseline_period = [datetime(1990,01,01),datetime(2020,12,31)];
+vidmid = ['Viðmiðunartímabil: ',num2str(baseline_period.Year(1)),' - ',num2str(baseline_period.Year(end))];
+%%
 addpath('/git/cdt/')
 addpath('/git/timeseriestools/')
 
@@ -32,19 +35,18 @@ figure, hold on
 plt_overlay(Rt.smb_mmWeq,tbl.smb_mmWeq,...
     [2021,2022,2023],[fig_title,'Dagleg afkoma yfirborðs'],...
     '(mm w.eq.)',...
-    'SMB',' smb_mmWeq');
+    'SMB',vidmid);
 
     cd '/projects/mar/daily_output'
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_ts.jpg']);
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_ts.pdf']);
 
-
 figure, hold on
 plt_overlay(Rc.smb_mmWeq,tbl.smb_mmWeq,...
     [2021,2022,2023],[fig_title,'- Uppsöfnuð afkoma yfirborðs'],...
     '(mm w.eq.)',...
-    '','smb_mmWeq');
-    
+    'SMB',vidmid);
+  
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_cumts.jpg']);
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_cumts.pdf']);
 
@@ -52,7 +54,7 @@ figure, hold on
 plt_overlay(Rc.snowfall_mmWeq,tbl.snowfall_mmWeq,...
     [2021,2022,2023],[fig_title,'- Uppsöfnuð úrkoma (snjór)'],...
     '(mm w.eq.)',...
-    'mmWeq',' ');
+    'Snjór',vidmid);
 
     exportgraphics(gcf,[pname,'mar_snowfall_mmWeq_cumts.jpg']);
     exportgraphics(gcf,[pname,'mar_snowfall_mmWeq_cumts.pdf']);
@@ -61,7 +63,7 @@ figure, hold on
 plt_overlay(Rc.rainfall_mmWeq,tbl.rainfall_mmWeq,...
     [2021,2022,2023],[fig_title,'- Uppsöfnuð úrkoma (regn)'],...
     '(mm w.eq.)',...
-    'mmWeq',' ');
+    'Regn',vidmid);
 
     exportgraphics(gcf,[pname,'mar_rainfall_mmWeq_cumts.jpg']);
     exportgraphics(gcf,[pname,'mar_rainfall_mmWeq_cumts.pdf']);
@@ -70,7 +72,7 @@ figure, hold on
 plt_overlay(Rc.runoff_mmWeq,tbl.runoff_mmWeq,...
     [2021,2022,2023],[fig_title,'- afrennsli'],...
     '(mm w.eq.)',...
-    'mmWeq',' ');
+    'Afrennsli',vidmid);
 
     exportgraphics(gcf,[pname,'mar_runoff_mmWeq_cumts.jpg']);
     exportgraphics(gcf,[pname,'mar_runoff_mmWeq_cumts.pdf']);
@@ -79,7 +81,7 @@ figure, hold on
 plt_overlay(Rc.meltwater_mmWeq,tbl.meltwater_mmWeq,...
     [2021,2022,2023],[fig_title,'- leysing'],...
     '(mm w.eq.)',...
-    'mmWeq',' ');
+    'Leysing',vidmid);
 
     exportgraphics(gcf,[pname,'mar_meltwater_mmWeq_cumts.jpg']);
     exportgraphics(gcf,[pname,'mar_meltwater_mmWeq_cumts.pdf']);
@@ -88,7 +90,7 @@ figure, hold on
 plt_overlay(Rt.air_temperature_2m,tbl.air_temperature_2m,...
     [2021,2022,2023],[fig_title,'- lofthiti'],...
     '(°C)',...
-    '',' ');
+    'Lofthiti',vidmid);
 
     exportgraphics(gcf,[pname,'mar_air_temperature_2m_ts.jpg']);
     exportgraphics(gcf,[pname,'mar_air_temperature_2m_ts.pdf']);
@@ -112,40 +114,40 @@ tiledlayout(4,1)
 nexttile, hold on
 plot(T.time,T.sw_n,'LineWidth',1.2,'Color',clines(1,:),...
     'DisplayName','sw_{net}');
-plot(T_mean.time,T_mean.sw_n_mean,'LineWidth',1.5,'Color',[clines(1,:),0.7],...
+plot(T_mean.time,T_mean.sw_n_mean,'LineWidth',1.5,'Color',[0,0,0,0.7],...
     'DisplayName','sw_{mean}');
 
-legend show
+legend('Location','northwest')
 grid on
 
 nexttile, hold on
 plot(T.time,T.lw_n,'LineWidth',1.2,'Color',clines(2,:),...
     'DisplayName','lw_{net}');
-plot(T_mean.time,T_mean.lw_n_mean,'LineWidth',1.5,'Color',[clines(2,:),0.7],...
+plot(T_mean.time,T_mean.lw_n_mean,'LineWidth',1.5,'Color',[0,0,0,0.7],...
     'DisplayName','lw_{mean}');
 
-legend show
+legend('Location','northwest')
 grid on
 
 nexttile, hold on
 plot(T.time,T.shf,'LineWidth',1.2,'Color',clines(3,:),...
     'DisplayName','shf');
-plot(T_mean.time,T_mean.shf_mean,'LineWidth',1.5,'Color',[clines(3,:),0.7],...
+plot(T_mean.time,T_mean.shf_mean,'LineWidth',1.5,'Color',[0,0,0,0.7],...
     'DisplayName','shf_{mean}');
 
-legend show
+legend('Location','northwest')
 grid on
 
 nexttile, hold on
 plot(T.time,T.lhf,'LineWidth',1.2,'Color',clines(4,:),...
     'DisplayName','lhf');
-plot(T_mean.time,T_mean.lhf_mean,'LineWidth',1.5,'Color',[clines(4,:),0.7],...
+plot(T_mean.time,T_mean.lhf_mean,'LineWidth',1.5,'Color',[0,0,0,0.7],...
     'DisplayName','lhf_{mean}');
 
-legend show
+legend('Location','northwest')
 grid on
 
-sgtitle([fig_title,'- orkuþættir']);
+sgtitle([fig_title,'- Orkuþættir']);
 
     exportgraphics(gcf,[pname,'mar_seb_ts.jpg']);
     exportgraphics(gcf,[pname,'mar_seb_ts.pdf']);
