@@ -1,13 +1,15 @@
-load('/Volumes/data-1/projects/mar/daily_output/marStacks-01_05_2024-30_05_2024.mat')
+load('/Volumes/data/projects/mar/daily_output/marStacks-01_05_2024-30_05_2024.mat')
 
 %% plt_mar_cubes()
 %%
 vis = 'on'
 text_up_left = 'rainfall_mmweq_bp_sum'
-%data = cube.air_temperature_2m_rp_mean-mean(cube.air_temperature_2m_bp_mean,3,'omitmissing');
 
-data = cube.rainfall_mmweq_rp_sum-mean(cube.rainfall_mmweq_bp_sum,3,'omitmissing')...
+data = cube.air_temperature_2m_rp_mean-mean(cube.air_temperature_2m_bp_mean,3,'omitmissing')...
     .*geo.ins.island_utlina;
+
+%data = cube.rainfall_mmweq_rp_sum-mean(cube.rainfall_mmweq_bp_sum,3,'omitmissing')...
+ %   .*geo.ins.island_utlina;
 
 set(0,'defaultfigurepaperunits','centimeters');
 x = 25;
@@ -24,8 +26,6 @@ set(0, 'DefaultFigurePosition', [.25 .25 [y x]-0.5]);
 
 latlimit = [63.3943927778338 66.5377933091516];
 lonlimit = [-24.5326753866627 -13.4946206239503];
-
-
 
 figure
 axesm('MapProjection','mercator','MapLatLimit',latlimit,'MapLonLimit',lonlimit);
