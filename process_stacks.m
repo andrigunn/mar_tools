@@ -179,7 +179,7 @@ for k = 1:length(vars_to_process)
 
 end
 
-cd /data/projects/mar/daily_outputs
+cd /data/projects/mar/monthly_data
 savename = [datestr(reference_period(1),'dd_mm_yyyy'),'-',datestr(reference_period(2),'dd_mm_yyyy')];
 save(['marStacks-',savename,'.mat'],"cube")
 end
