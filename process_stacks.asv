@@ -91,7 +91,7 @@ for k = 1:length(vars_to_process)
 
             startTime =[datetime(yr,...
                 reference_period.Month(1),...
-                reference_period.Day(1))];
+                reference_period.Day(1))]
 
             endTime = [datetime(yr+1,...
                 reference_period.Month(end),...
@@ -99,7 +99,7 @@ for k = 1:length(vars_to_process)
         end
 
         data_ix = find(nc_Time >= startTime &...
-            nc_Time <= endTime);
+            nc_Time <= endTime)
 
         times = nc_Time(data_ix);
 
@@ -143,12 +143,12 @@ for k = 1:length(vars_to_process)
         end
 
         data_ix = find(nc_Time >= startTime &...
-            nc_Time <= endTime);
+            nc_Time <= endTime)
 
         times = nc_Time(data_ix);
 
-        dataTimes_ref(i,1) = times(1);
-        dataTimes_ref(i,2) = times(end);
+        dataTimes_ref(i,1) = times(1)
+        dataTimes_ref(i,2) = times(end)
 
         data_rper_mean(:,:,i) = mean(nc_stack(:,:,data_ix),3,'omitmissing');
         data_rper_sum(:,:,i) = sum(nc_stack(:,:,data_ix),3,'omitmissing');
