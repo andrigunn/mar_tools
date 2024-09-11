@@ -1,5 +1,8 @@
-
-cd /projects/mar/daily_output
+if ismac
+    cd /Volumes/data/projects/mar/daily_output/
+elseif isunix
+    cd /projects/mar/daily_output
+end
 %%
 baseline_period = [datetime(1990,01,01),datetime(2020,12,31)];
 vidmid = ['Viðmiðunartímabil: ',num2str(baseline_period.Year(1)),' - ',num2str(baseline_period.Year(end))];
@@ -22,6 +25,8 @@ set(0, 'DefaultFigurePosition', [.25 .25 [35 21]-0.5]);
 d = dir('*_overlay*');
 %%
 for i = 1:length(d)
+    %%
+
     load([d(i).name]);
     gname = [d(i).name];
     gname = replace( gname , '_' , ' ' );
@@ -30,14 +35,19 @@ for i = 1:length(d)
 
     pname = replace( gname , ' ' , '_' );
     pname = replace( pname , '__' , '_' );
-
+%%
 figure, hold on
 plt_overlay(Rt.smb_mmWeq,tbl.smb_mmWeq,...
     [2021,2022,2023],[fig_title,'Dagleg afkoma yfirborðs'],...
     '(mm w.eq.)',...
     'SMB',vidmid);
 
+if ismac
+    cd '/Users/andrigun/Library/CloudStorage/OneDrive-Landsvirkjun/Verkefni - [T] Vatnafarsrannsóknir/Horfur vatnafars/Hofur og staða vatnafars/2024-09-11/'
+
+elseif isunix
     cd '/projects/mar/daily_output'
+end
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_ts.jpg']);
     exportgraphics(gcf,[pname,'mar_smb_mmWeq_ts.pdf']);
 

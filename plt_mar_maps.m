@@ -1,16 +1,46 @@
-load('/Volumes/data/projects/mar/daily_output/marStacks-01_05_2024-30_05_2024.mat')
-
-%% plt_mar_cubes()
+load('/Volumes/data-1/projects/mar/daily_output/marStacks-01_05_2024-30_05_2024.mat')
+S = shaperead('/Users/andrigun/Dropbox/04-Repos/geo/shp/island_utlina.shp')
+%%
+load('geo_hv17.mat')
+cube.geo.lat = lat;
+cube.geo.lon = lon;
+cube.geo.mask.island_rav = island;
+%%
+downscale = 1
+% plt_mar_cubes(cube, downscale,variable)
 %%
 vis = 'on'
-text_up_left = 'rainfall_mmweq_bp_sum'
+text_up_left = 'precip'
+variable = 'precip'
 
-data = cube.air_temperature_2m_rp_mean-mean(cube.air_temperature_2m_bp_mean,3,'omitmissing')...
-    .*geo.ins.island_utlina;
+if contains(variable, 'air_temperature')
 
+    data = cube.air_temperature_2m_rp_mean-...
+        mean(cube.air_temperature_2m_bp_mean,3,'omitmissing');
+
+elseif contains(variable, 'precip')
+
+        data = (cube.rainfall_mmweq_rp_sum+cube.snowfall_mmweq_rp_sum)...
+            -...
+        mean((cube.rainfall_mmweq_bp_sum+cube.smb_mmweq_bp_sum),3,'omitmissing');
+end
+
+%
+    
+    if downscale == 1
+        mapped_data = mar2modisgrid(data,cube.geo).*cube.geo.mask.island_rav;
+        lats = cube.geo.lat;
+        lons = cube.geo.lon;
+
+    else
+        mapped_data = data;
+        lats = cube.geo.lat_mar;
+        lons = cube.geo.lon_mar;
+
+    end
 %data = cube.rainfall_mmweq_rp_sum-mean(cube.rainfall_mmweq_bp_sum,3,'omitmissing')...
  %   .*geo.ins.island_utlina;
-
+%%
 set(0,'defaultfigurepaperunits','centimeters');
 x = 25;
 y = 45;
@@ -31,15 +61,15 @@ figure
 axesm('MapProjection','mercator','MapLatLimit',latlimit,'MapLonLimit',lonlimit);
 hold on
 
-pcolorm(double(cube.geo.lat_mar),...
-    double(cube.geo.lon_mar),...
-    double(data));
+pcolorm(double(lats),...
+    double(lons),...
+    double(mapped_data));
     
     shading interp
     
     cmocean('balance','pivot',0)
     colorbar
-    
+    plotm(S.Y,S.X,'Color','k')
     reference_period = ([['Tímabil: ' datestr(cube.reference_period(1),'dd.mm.yyyy'),' til ',datestr(cube.reference_period(2),'dd.mm.yyyy')]]);
     baseline_period = ([['Viðmið: ' datestr(cube.baseline_period(1),'yyyy'),' til ',datestr(cube.baseline_period(2),'yyyy')]]);
 
